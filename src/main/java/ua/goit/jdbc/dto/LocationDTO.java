@@ -57,4 +57,15 @@ public class LocationDTO {
     public void setStateProvince(String stateProvince) {
         this.stateProvince = stateProvince;
     }
+
+    @Override
+    public String toString() {
+        return "LocationDTO{" +
+                "id=" + id +
+                ", streetAddress='" + streetAddress + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", city='" + city + '\'' +
+                ", stateProvince='" + stateProvince + '\'' +
+                '}';
+    }
 }

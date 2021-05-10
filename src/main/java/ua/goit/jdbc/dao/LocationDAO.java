@@ -1,14 +1,13 @@
 package ua.goit.jdbc.dao;
 
+import ua.goit.jdbc.config.DatabaseConnectionManager;
 import ua.goit.jdbc.dao.model.Location;
 
-import java.sql.Connection;
-
 public class LocationDAO implements DataAccessObject<Location> {
-    private final Connection connection;
+    private final DatabaseConnectionManager connectionManager;
 
-    public LocationDAO(Connection connection) {
-        this.connection = connection;
+    public LocationDAO(DatabaseConnectionManager connectionManager) {
+        this.connectionManager = connectionManager;
     }
 
     @Override
