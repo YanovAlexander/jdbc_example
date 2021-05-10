@@ -14,7 +14,8 @@ public class LocationService {
 
     public LocationDTO create(LocationDTO locationDTO) {
         Location location = LocationConverter.toLocation(locationDTO);
-        Location savedLocation = repository.create(location);
+        repository.create(location);
+        Location savedLocation = repository.findById(location.getId());
         return LocationConverter.fromLocation(savedLocation);
     }
 }
