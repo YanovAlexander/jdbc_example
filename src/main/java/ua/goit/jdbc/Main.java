@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         DatabaseConnectionManager cm = new DatabaseConnectionManager("localhost", "go_it",
                 "postgres", "12345");
-        LocationDTO dto = new LocationDTO(100, "Ukraine", "12345", "Kyiv", "Kyiv");
+        LocationDTO dto = new LocationDTO(101, "Khreshatyk", "12345", "Kyiv", "Kyiv");
 
         Repository<Location> locationRepository = new LocationRepository(cm);
         LocationService service = new LocationService(locationRepository);

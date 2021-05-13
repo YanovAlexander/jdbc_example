@@ -1,12 +1,14 @@
 package ua.goit.jdbc.config;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.postgresql.ds.PGConnectionPoolDataSource;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DatabaseConnectionManager {
-    PGConnectionPoolDataSource pgConnectionPoolDataSource = new PGConnectionPoolDataSource();
+    private HikariDataSource ds;
 
     public DatabaseConnectionManager(String host, String databaseName, String username, String password) {
         initDataSource(host, databaseName, username, password);
@@ -14,7 +16,7 @@ public class DatabaseConnectionManager {
 
     public Connection getConnection() {
         try {
-            return pgConnectionPoolDataSource.getConnection();
+            return ds.getConnection();
         } catch (SQLException throwables) {
             System.err.println(throwables.getMessage());
             throw new RuntimeException(throwables);
@@ -22,8 +24,13 @@ public class DatabaseConnectionManager {
     }
 
     private void initDataSource(String host, String databaseName, String username, String password) {
-        pgConnectionPoolDataSource.setUrl(String.format("jdbc:postgresql://%s/%s", host, databaseName));
-        pgConnectionPoolDataSource.setUser(username);
-        pgConnectionPoolDataSource.setPassword(password);
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl(String.format("jdbc:postgresql://%s/%s", host, databaseName));
+        config.setUsername(username);
+        config.setPassword(password);
+        config.setMaximumPoolSize(10);
+        config.setIdleTimeout(10_000);
+        config.setConnectionTimeout(10_000);
+        ds = new HikariDataSource(config);
     }
 }
