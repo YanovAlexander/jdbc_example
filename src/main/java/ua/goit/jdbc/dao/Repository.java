@@ -8,4 +8,6 @@ public interface Repository<T> {
     void create(T entity);
 
     void update(LocationDAO locationDAO);
+
+    void delete(int id);
 }

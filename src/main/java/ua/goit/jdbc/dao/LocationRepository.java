@@ -14,7 +14,8 @@ public class LocationRepository implements Repository<LocationDAO> {
     private static final String SELECT_LOCATIONS_BY_ID = "SELECT location_id, street_address, postal_code, " +
             "city, state_province FROM locations WHERE location_id = ?;";
     private static final String UPDATE = "UPDATE locations SET street_address=?, postal_code=?, " +
-            "city=?, state_province=? WHERE location_id=?";
+            "city=?, state_province=? WHERE location_id=?;";
+    private static final String DELETE = "DELETE FROM locations WHERE location_id=?;";
 
     public LocationRepository(DatabaseConnectionManager connectionManager) {
         this.connectionManager = connectionManager;
@@ -61,6 +62,17 @@ public class LocationRepository implements Repository<LocationDAO> {
             preparedStatement.execute();
         } catch (SQLException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void delete(int id) {
+        try (Connection connection = connectionManager.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE)) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

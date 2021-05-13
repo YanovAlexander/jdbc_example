@@ -11,17 +11,19 @@ public class Main {
     public static void main(String[] args) {
         DatabaseConnectionManager cm = new DatabaseConnectionManager("localhost", "go_it",
                 "postgres", "12345");
-        LocationDTO dto = new LocationDTO(103, "Khreshatyk", "12345", "Kyiv", "Kyiv");
+        LocationDTO dto = new LocationDTO(104, "Khreshatyk", "12345", "Kyiv", "Kyiv");
 
         Repository<LocationDAO> locationRepository = new LocationRepository(cm);
         LocationService service = new LocationService(locationRepository);
 
         LocationDTO locationDTO = service.create(dto);
         System.out.println(locationDTO);
-        System.out.println("------------------------------");
-        System.out.println("UPDATED");
-        dto.setCity("Mykolaiv");
-        LocationDTO update = service.update(dto);
-        System.out.println(update);
+//        System.out.println("------------------------------");
+//        System.out.println("UPDATED");
+//        dto.setCity("Mykolaiv");
+//        LocationDTO update = service.update(dto);
+//        System.out.println(update);
+//
+        service.delete(104);
     }
 }
