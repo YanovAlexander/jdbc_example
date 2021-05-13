@@ -1,22 +1,28 @@
 package ua.goit.jdbc.service;
 
 import ua.goit.jdbc.dao.Repository;
-import ua.goit.jdbc.dao.model.Location;
+import ua.goit.jdbc.dao.model.LocationDAO;
 import ua.goit.jdbc.dto.LocationDTO;
 
 public class LocationService {
 
-    private Repository<Location> repository;
+    private Repository<LocationDAO> repository;
 
-    public LocationService(Repository<Location> repository) {
+    public LocationService(Repository<LocationDAO> repository) {
         this.repository = repository;
     }
 
     public LocationDTO create(LocationDTO locationDTO) {
-        Location location = LocationConverter.toLocation(locationDTO);
-        //find departament and validate
-        repository.create(location);
-        Location savedLocation = repository.findById(location.getId());
-        return LocationConverter.fromLocation(savedLocation);
+        LocationDAO locationDAO = LocationConverter.toLocation(locationDTO);
+        repository.create(locationDAO);
+        LocationDAO savedLocationDAO = repository.findById(locationDAO.getId());
+        return LocationConverter.fromLocation(savedLocationDAO);
+    }
+
+    public LocationDTO update(LocationDTO dto) {
+        LocationDAO locationDAO = LocationConverter.toLocation(dto);
+        repository.update(locationDAO);
+        LocationDAO updatedLocationDAO = repository.findById(dto.getId());
+        return LocationConverter.fromLocation(updatedLocationDAO);
     }
 }

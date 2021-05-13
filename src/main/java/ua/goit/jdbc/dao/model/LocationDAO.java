@@ -1,16 +1,16 @@
 package ua.goit.jdbc.dao.model;
 
-public class Location {
+public class LocationDAO {
     private Integer id;
     private String streetAddress;
     private String postalCode;
     private String city;
     private String stateProvince;
 
-    public Location() {
+    public LocationDAO() {
     }
 
-    public Location(Integer id, String streetAddress, String postalCode, String city, String stateProvince) {
+    public LocationDAO(Integer id, String streetAddress, String postalCode, String city, String stateProvince) {
         this.id = id;
         this.streetAddress = streetAddress;
         this.postalCode = postalCode;
