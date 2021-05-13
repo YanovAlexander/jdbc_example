@@ -6,7 +6,7 @@ import ua.goit.jdbc.service.LocationConverter;
 
 import java.sql.*;
 
-public class LocationDAO implements DataAccessObject<Location> {
+public class LocationRepository implements Repository<Location> {
     private final DatabaseConnectionManager connectionManager;
 
     private static final String INSERT = "INSERT INTO locations (location_id, street_address, postal_code, " +
@@ -14,7 +14,7 @@ public class LocationDAO implements DataAccessObject<Location> {
     private static final String SELECT_LOCATIONS_BY_ID = "SELECT location_id, street_address, postal_code, " +
             "city, state_province FROM locations WHERE location_id = ?;";
 
-    public LocationDAO(DatabaseConnectionManager connectionManager) {
+    public LocationRepository(DatabaseConnectionManager connectionManager) {
         this.connectionManager = connectionManager;
     }
 
